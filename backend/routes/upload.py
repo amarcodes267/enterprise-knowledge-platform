@@ -37,10 +37,12 @@ def upload_file():
 
     # Generate embeddings
     embeddings = generate_embeddings(chunks)
+    store_embeddings(chunks, embeddings, file.filename)
 
     return jsonify({
-        "status": "success",
-        "filename": file.filename,
-        "total_chunks": len(chunks),
-        "embedding_count": len(embeddings)
-    })
+    "status": "success",
+    "filename": file.filename,
+    "total_chunks": len(chunks),
+    "embedding_count": len(embeddings),
+    "stored": True
+})
