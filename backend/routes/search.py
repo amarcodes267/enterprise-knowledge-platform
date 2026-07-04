@@ -1,11 +1,13 @@
 from flask import Blueprint, jsonify, request
+
 from services.search_service import search_documents
+from services.llm_service import generate_answer
 
 search_bp = Blueprint("search", __name__)
 
-
 @search_bp.route("/search", methods=["GET"])
 def search():
+
     query = request.args.get("query", "").strip()
 
     if not query:
@@ -14,15 +16,20 @@ def search():
             "message": "Query parameter 'query' is required"
         }), 400
 
-    result = search_documents(query)
+    # Search documents
+    results = search_documents(query)
 
-    if result.get("status") == "error":
-        return jsonify(result), 500
+    # If search failed
+    if isinstance(results, dict) and results.get("status") == "error":
+        return jsonify(results), 500
+
+    # Generate AI answer
+    answer = generate_answer(query, results)
 
     return jsonify({
         "status": "success",
         "query": query,
-        "results": result.get("results", []),
-        "metadatas": result.get("metadatas", []),
-        "distances": result.get("distances", [])
+        "answer": answer,
+        "sources": results,
+        "total_sources": len(results)
     })

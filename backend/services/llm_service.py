@@ -10,16 +10,24 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 
 def generate_answer(query, context):
 
+    # Convert list of chunks into readable text
+    formatted_context = "\n\n".join(context)
+
     prompt = f"""
-You are an AI assistant.
+You are an AI assistant for an Enterprise Knowledge Platform.
 
-Use ONLY the information provided in the context below to answer the question.
+Your job is to answer the user's question using ONLY the information provided in the context.
 
-If the answer is not available in the context, reply:
-"I could not find the answer in the uploaded documents."
+Rules:
+1. Do not use outside knowledge.
+2. Do not make up information.
+3. If the answer is not found in the context, reply:
+   "I could not find the answer in the uploaded documents."
+4. Keep the answer clear and concise.
+5. Use bullet points if appropriate.
 
 Context:
-{context}
+{formatted_context}
 
 Question:
 {query}

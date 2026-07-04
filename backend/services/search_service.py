@@ -1,5 +1,5 @@
 import chromadb
-from embedding_service import generate_embeddings
+from services.embedding_service import generate_embeddings
 
 # Initialize ChromaDB client and collection
 client = chromadb.Client()
