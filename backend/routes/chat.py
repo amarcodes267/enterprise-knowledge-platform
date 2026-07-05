@@ -36,8 +36,11 @@ def chat():
     # Store assistant response
     store_message("assistant", answer)
 
+    history = get_chat_history()
+
     return jsonify({
         "status": "success",
         "answer": answer,
-        "history": get_chat_history()
+        "history": history,
+        "total_messages": len(history)
     })
