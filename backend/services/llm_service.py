@@ -42,7 +42,12 @@ Current Question:
 
 Answer:
 """
+try:
 
     response = model.generate_content(prompt)
 
     return response.text
+
+except Exception as e:
+
+    return "Unable to generate response"
