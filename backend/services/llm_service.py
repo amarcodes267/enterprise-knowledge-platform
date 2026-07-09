@@ -1,6 +1,8 @@
 import os
 import google.generativeai as genai
 from services.chat_service import format_chat_history
+from dotenv import load_dotenv
+load_dotenv()
 
 # Configure Gemini API from environment variable
 api_key = os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY")
@@ -42,12 +44,9 @@ Current Question:
 
 Answer:
 """
-try:
 
-    response = model.generate_content(prompt)
-
-    return response.text
-
-except Exception as e:
-
-    return "Unable to generate response"
+    try:
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        return "Unable to generate response"
