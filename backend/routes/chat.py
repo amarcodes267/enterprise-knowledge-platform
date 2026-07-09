@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 
 from services.chat_service import (
     store_message,
-    get_chat_history
+    get_chat_history,
 )
 
 from services.search_service import search_documents

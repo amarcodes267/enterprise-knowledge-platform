@@ -1,7 +1,10 @@
 import os
+
 import google.generativeai as genai
-from services.chat_service import format_chat_history
 from dotenv import load_dotenv
+
+from services.chat_service import format_chat_history
+
 load_dotenv()
 
 # Configure Gemini API from environment variable
@@ -13,8 +16,17 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 
 
 def generate_answer(query, context):
+    """Generate an answer based on chat history and retrieved document context.
+
+    search_documents() returns a dict: {status, results, metadatas, distances}
+    where `results` is a list of chunk texts.
+    """
+
     if isinstance(context, str):
         formatted_context = context
+    elif isinstance(context, dict):
+        chunks = context.get("results", [])
+        formatted_context = "\n\n".join(chunks) if isinstance(chunks, list) else str(chunks)
     else:
         formatted_context = "\n\n".join(context)
 
@@ -48,5 +60,6 @@ Answer:
     try:
         response = model.generate_content(prompt)
         return response.text
-    except Exception as e:
+    except Exception:
         return "Unable to generate response"
+
