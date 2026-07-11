@@ -32,4 +32,4 @@ def home():
     return "Enterprise Knowledge Intelligence Platform Running"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
