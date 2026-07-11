@@ -1,5 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Allow running app.py both as `python app.py` and as a module.
 # When running as `python app.py` the package name `backend` isn't importable.
