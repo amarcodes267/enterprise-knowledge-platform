@@ -1,13 +1,23 @@
-import chromadb
-from services.embedding_service import generate_embeddings
+"""Semantic search service.
 
-# Initialize ChromaDB client and collection
-client = chromadb.Client()
-collection = client.get_or_create_collection(name="documents")
+This module previously imported chromadb at import-time.
+If optional Chroma telemetry dependencies are missing, it can prevent Flask from starting.
+We lazy-load Chroma and fail gracefully when it isn't available.
+"""
+
+from __future__ import annotations
+
+from typing import Any
+
+from backend.services.embedding_service import generate_embeddings
+from backend.services.vector_db_service import _get_collection
+
 
 
 def search_documents(query, top_k=3):
+
     """
+
     Search for relevant documents based on a query using semantic search.
     
     Args:
@@ -23,18 +33,24 @@ def search_documents(query, top_k=3):
     """
     
     try:
-        # Generate embedding for the query
         query_embedding = generate_embeddings([query])[0]
-        
-        # Query the collection for top_k results
+
+        collection = _get_collection()
+        if collection is None:
+            return {
+                "status": "error",
+                "message": "Chroma collection is unavailable",
+                "results": [],
+            }
+
         results = collection.query(
+
             query_embeddings=[query_embedding],
             n_results=top_k
         )
         
-        # Extract and format the results
         if results["documents"] and len(results["documents"]) > 0:
-            chunks = results["documents"][0]  # Get the first (and only) query result
+            chunks = results["documents"][0]
             metadatas = results["metadatas"][0] if results["metadatas"] else []
             distances = results["distances"][0] if results["distances"] else []
             
@@ -44,6 +60,7 @@ def search_documents(query, top_k=3):
                 "metadatas": metadatas,
                 "distances": distances
             }
+
         else:
             return {
                 "status": "success",

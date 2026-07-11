@@ -1,0 +1,103 @@
+.home-container{
+    min-height:100vh;
+    background:linear-gradient(135deg,#f7f8ff 0%,#eef5ff 55%,#f5efff 100%);
+}
+
+.hero-section{
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-section::before{
+    content:"";
+    position:absolute;
+    top:-150px;
+    left:-150px;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:#b388ff;
+    opacity:.15;
+    filter:blur(70px);
+}
+
+.hero-section::after{
+    content:"";
+    position:absolute;
+    right:-150px;
+    top:-100px;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:#66a6ff;
+    opacity:.18;
+    filter:blur(80px);
+}
+
+.hero-title{
+    background:linear-gradient(90deg,#1e293b,#5b5ce6,#3b82f6);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.feature-card{
+    position:relative;
+    overflow:hidden;
+    background:#ffffff;
+    border-radius:20px;
+    border:1px solid rgba(110,110,255,.15);
+    box-shadow:0 15px 40px rgba(86,102,255,.08);
+    transition:all .3s ease;
+}
+
+.feature-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 55px rgba(90,102,255,.18);
+}
+
+.primary-btn{
+    background:linear-gradient(90deg,#6c63ff,#3b82f6);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    transition:all .3s ease;
+}
+
+.primary-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(70,90,255,.35);
+}
+
+.icon-circle{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#efe7ff,#dcecff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.feature-card::after{
+    content:"";
+    position:absolute;
+    bottom:18px;
+    right:18px;
+    width:55px;
+    height:55px;
+    background-image:radial-gradient(#b388ff 1.8px,transparent 1.8px);
+    background-size:10px 10px;
+    opacity:.25;
+}
+
+.hero-subtitle{
+    color:#64748b;
+    font-size:20px;
+    font-weight:500;
+}
+
+.feature-card h2{
+    color:#4338ca;
+    font-weight:700;
+}
+

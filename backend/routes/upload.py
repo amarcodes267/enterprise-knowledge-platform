@@ -1,18 +1,25 @@
 from flask import Blueprint, request, jsonify
 import os
 
-from services.pdf_service import extract_text_from_pdf
-from services.chunk_service import chunk_text
-from services.embedding_service import generate_embeddings
-from services.vector_db_service import store_embeddings
+from backend.services.pdf_service import extract_text_from_pdf
+from backend.services.chunk_service import chunk_text
+from backend.services.embedding_service import generate_embeddings
+from backend.services.vector_db_service import store_embeddings
+
+from backend.utils.auth_required import auth_required
+
 
 upload_bp = Blueprint("upload", __name__)
+
 
 UPLOAD_FOLDER = "uploads"
 
 
+
 @upload_bp.route("/upload", methods=["POST"])
-def upload_file():
+@auth_required
+def upload_file(auth_claims):
+
     if "file" not in request.files:
         return jsonify({
             "status": "error",
@@ -21,33 +28,50 @@ def upload_file():
 
     file = request.files["file"]
 
-    if file.filename == "":
+    if not file or file.filename == "":
         return jsonify({
             "status": "error",
             "message": "No file selected",
         }), 400
 
+    filename = file.filename
+    lower = filename.lower()
+
+    if not lower.endswith(".pdf"):
+        return jsonify({
+            "status": "error",
+            "message": "Only PDF files are accepted",
+        }), 400
+
+    # Best-effort MIME check (not fully reliable across browsers)
+    content_type = (file.mimetype or "").lower()
+    if content_type and content_type not in ["application/pdf"]:
+        return jsonify({
+            "status": "error",
+            "message": "Invalid file type. Please upload a PDF.",
+        }), 400
+
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-    # Keep filename as-is (Chroma ids use filename in a hash).
-    filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+    filepath = os.path.join(UPLOAD_FOLDER, filename)
     file.save(filepath)
 
-    # Extract text
-    text = extract_text_from_pdf(filepath)
-
-    # Create chunks
-    chunks = chunk_text(text)
-
-    # Generate embeddings
-    embeddings = generate_embeddings(chunks)
-
-    store_embeddings(chunks, embeddings, file.filename)
+    try:
+        text = extract_text_from_pdf(filepath)
+        chunks = chunk_text(text)
+        embeddings = generate_embeddings(chunks)
+        store_embeddings(chunks, embeddings, filename)
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": str(e),
+        }), 500
 
     return jsonify({
         "status": "success",
-        "filename": file.filename,
+        "filename": filename,
         "total_chunks": len(chunks),
         "embedding_count": len(embeddings),
         "stored": True,
     })
+

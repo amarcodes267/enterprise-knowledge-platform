@@ -1,18 +1,40 @@
 import os
 
-import google.generativeai as genai
+"""LLM service (Gemini).
+
+This module is imported at Flask startup.
+In some local environments, optional google generative language dependencies may be missing,
+causing import-time failure.
+
+To ensure the server can start on localhost, we lazy-load Gemini and fail gracefully.
+"""
+
 from dotenv import load_dotenv
 
-from services.chat_service import format_chat_history
+from backend.services.chat_service import format_chat_history
 
 load_dotenv()
 
-# Configure Gemini API from environment variable
-api_key = os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY")
-genai.configure(api_key=api_key)
+_model = None
+_model_error: str | None = None
 
-# Load Gemini model
-model = genai.GenerativeModel("gemini-2.5-flash")
+
+def _get_model():
+    global _model, _model_error
+    if _model is not None or _model_error is not None:
+        return _model
+
+    try:
+        import google.generativeai as genai  # type: ignore
+
+        api_key = os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY")
+        genai.configure(api_key=api_key)
+        _model = genai.GenerativeModel("gemini-2.5-flash")
+        return _model
+    except Exception as e:  # pragma: no cover
+        _model_error = str(e)
+        _model = None
+        return None
 
 
 def generate_answer(query, context):
@@ -56,6 +78,10 @@ Current Question:
 
 Answer:
 """
+
+    model = _get_model()
+    if model is None:
+        return "Unable to generate response"
 
     try:
         response = model.generate_content(prompt)

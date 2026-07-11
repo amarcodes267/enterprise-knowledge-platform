@@ -3,47 +3,63 @@ import uploadPDF from "../services/uploadService";
 
 function UploadBox() {
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleFileChange = (event) => {
+    setError("");
+    setSuccess("");
     setFile(event.target.files[0]);
   };
 
   const handleUpload = async () => {
+    setError("");
+    setSuccess("");
+
     if (!file) {
-      alert("Please select a PDF file.");
+      setError("Please select a PDF file.");
+      return;
+    }
+
+    const lower = (file.name || "").toLowerCase();
+    if (!lower.endsWith(".pdf")) {
+      setError("Only PDF files are accepted.");
       return;
     }
 
     try {
+      setLoading(true);
       const result = await uploadPDF(file);
 
-      // backend returns: { status, filename, total_chunks, embedding_count, stored }
       if (result?.status === "success") {
-        alert(
-          `PDF uploaded successfully: ${result.filename}\nChunks: ${result.total_chunks}, Embeddings: ${result.embedding_count}`
+        setSuccess(
+          `PDF uploaded successfully: ${result.filename} | Chunks: ${result.total_chunks}, Embeddings: ${result.embedding_count}`
         );
       } else {
-        alert(result?.message || "Upload failed.");
+        setError(result?.message || "Upload failed.");
       }
-    } catch (error) {
-      alert("Upload failed. Check console for details.");
-      console.error(error);
+    } catch (e) {
+      console.error(e);
+      setError("Upload failed. Check console for details.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div>
-      <input
-        type="file"
-        accept=".pdf"
-        onChange={handleFileChange}
-      />
+      <input type="file" accept=".pdf" onChange={handleFileChange} />
 
-      <button onClick={handleUpload}>
-        Upload PDF
+      <button onClick={handleUpload} disabled={loading}>
+        {loading ? "Uploading..." : "Upload PDF"}
       </button>
+
+      {success ? <div style={{ color: "#0a7a0a", marginTop: 10 }}>{success}</div> : null}
+      {error ? <div style={{ color: "#b00020", marginTop: 10 }}>{error}</div> : null}
     </div>
   );
 }
 
 export default UploadBox;
+

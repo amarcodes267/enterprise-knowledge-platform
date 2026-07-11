@@ -1,60 +1,73 @@
 import { useState } from "react";
+
 import { searchDocuments } from "../services/searchService";
 
 function Search() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
   const [error, setError] = useState("");
+  const [results, setResults] = useState([]);
 
-  async function handleSearch() {
-    const q = query.trim();
-    if (!q) return;
-
-    setLoading(true);
+  const handleSearch = async () => {
     setError("");
+    setResults([]);
+
+    const q = query.trim();
+    if (!q) {
+      setError("Please enter a search query.");
+      return;
+    }
 
     try {
-      const data = await searchDocuments(q);
-      setResult(data);
+      setLoading(true);
+      const res = await searchDocuments(q);
+
+      if (res?.status === "success") {
+        setResults(Array.isArray(res.sources) ? res.sources : []);
+      } else {
+        setError(res?.message || "Search failed.");
+      }
     } catch (e) {
-      setError(e?.message || "Unknown error");
+      console.error(e);
+      setError("Unable to get search results.");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
-    <div style={{ padding: 24 }}>
-      <h2>Search</h2>
+    <div style={{ padding: 16 }}>
+      <h1>Search Documents</h1>
+
       <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
         <input
+          type="text"
           value={query}
+          placeholder="Enter query..."
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search query..."
-          style={{ flex: 1, padding: 10, borderRadius: 6, border: "1px solid #ddd" }}
-          disabled={loading}
+          style={{ flex: 1 }}
         />
-        <button
-          onClick={handleSearch}
-          disabled={loading || query.trim().length === 0}
-          style={{ padding: "10px 14px", borderRadius: 6, border: 0, background: "#111", color: "#fff" }}
-        >
+        <button onClick={handleSearch} disabled={loading}>
           {loading ? "Searching..." : "Search"}
         </button>
       </div>
 
       {error ? <div style={{ color: "#b00020" }}>{error}</div> : null}
 
-      {result ? (
-        <div style={{ marginTop: 16 }}>
-          <div style={{ fontWeight: 700, marginBottom: 6 }}>Answer</div>
-          <div style={{ whiteSpace: "pre-wrap", marginBottom: 12 }}>{result.answer}</div>
+      {!loading && results.length === 0 && query.trim() ? (
+        <div style={{ color: "#666", marginTop: 12 }}>No results found.</div>
+      ) : null}
 
-          <div style={{ fontWeight: 700, marginBottom: 6 }}>Sources</div>
-          <pre style={{ background: "#f6f6f6", padding: 12, borderRadius: 8, overflow: "auto" }}>
-            {JSON.stringify(result.sources, null, 2)}
-          </pre>
+      {results.length > 0 ? (
+        <div style={{ marginTop: 16 }}>
+          <h2>Results</h2>
+          <ul>
+            {results.map((src, idx) => (
+              <li key={idx} style={{ marginBottom: 10 }}>
+                <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>{src}</pre>
+              </li>
+            ))}
+          </ul>
         </div>
       ) : null}
     </div>
