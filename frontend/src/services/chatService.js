@@ -1,19 +1,30 @@
 import BASE_URL from "./api";
 
-export async function sendChatMessage(message) {
-  const res = await fetch(`${BASE_URL}/chat`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ message }),
-  });
+async function sendMessage(message) {
 
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`Chat failed: ${res.status} ${text}`);
-  }
+    const response = await fetch(`${BASE_URL}/chat`, {
 
-  return res.json();
+        method: "POST",
+
+        headers: {
+
+            "Content-Type": "application/json"
+
+        },
+
+        body: JSON.stringify({
+
+            message: message
+
+        })
+
+    });
+
+    const data = await response.json();
+
+    return data;
+
 }
+
+export default sendMessage;
 

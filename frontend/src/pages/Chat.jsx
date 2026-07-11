@@ -2,12 +2,12 @@ import ChatBox from "../components/ChatBox";
 
 function Chat() {
   return (
-    <div style={{ padding: 24 }}>
-      <h2>Chat</h2>
+    <div>
+      <h1>Chat with Your Documents</h1>
+
       <ChatBox />
     </div>
   );
 }
 
 export default Chat;
-
