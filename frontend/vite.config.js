@@ -1,11 +1,6 @@
-import { defineConfig } from 'vite';
-import reactOxc from '@vitejs/plugin-react-oxc';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  plugins: [reactOxc()],
-  server: {
-    port: 5173,
-  },
-});
-
-
+  plugins: [react()],
+})
