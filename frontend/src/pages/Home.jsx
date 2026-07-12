@@ -1,60 +1,114 @@
-import { Link } from "react-router-dom";
+import Hero from "../components/Hero";
+import FeatureCards from "../components/FeatureCards";
+import Footer from "../components/Footer";
+
 import "../styles/Home.css";
 
 function Home() {
   return (
-    <div className="home-container">
+    <>
 
-      <h1 className="home-title">
-        Enterprise Knowledge Intelligence Platform
-      </h1>
+      <Hero />
 
-      <p className="home-subtitle">
-        Upload PDFs, Search Documents and Chat with AI using RAG &
-        Semantic Search.
-      </p>
+      <FeatureCards />
 
-      <div className="card-container">
+      {/* Why Choose Us Section */}
 
-        <div className="card">
-          <h2>📄 Upload Documents</h2>
+      <section className="why-section">
 
-          <p>
-            Upload PDF documents to build your enterprise knowledge base.
-          </p>
+        <h2>Why Choose Our Platform?</h2>
 
-          <Link to="/upload">
-            Go to Upload
-          </Link>
+        <p className="section-subtitle">
+          Build an intelligent enterprise knowledge base powered by
+          Retrieval-Augmented Generation (RAG), ChromaDB, and Gemini AI.
+        </p>
+
+        <div className="why-grid">
+
+          <div className="why-card">
+            <h3>⚡ Lightning Fast</h3>
+
+            <p>
+              Retrieve answers from thousands of documents in seconds
+              using semantic search.
+            </p>
+          </div>
+
+          <div className="why-card">
+            <h3>🔒 Secure</h3>
+
+            <p>
+              Protected authentication with Google OAuth and JWT
+              authorization.
+            </p>
+          </div>
+
+          <div className="why-card">
+            <h3>🧠 AI Powered</h3>
+
+            <p>
+              Get accurate AI-generated responses using Gemini AI and
+              Retrieval-Augmented Generation.
+            </p>
+          </div>
+
         </div>
 
-        <div className="card">
-          <h2>💬 Chat with Documents</h2>
+      </section>
 
-          <p>
-            Ask questions from uploaded documents using Gemini AI.
-          </p>
+      {/* Statistics */}
 
-          <Link to="/chat">
-            Go to Chat
-          </Link>
+      <section className="stats">
+
+        <div className="stat-card">
+          <h2>24/7</h2>
+          <p>AI Availability</p>
         </div>
 
-        <div className="card">
-          <h2>🔍 Search Documents</h2>
-
-          <p>
-            Perform semantic search across your knowledge base.
-          </p>
-
-          <Link to="/search">
-            Go to Search
-          </Link>
+        <div className="stat-card">
+          <h2>100%</h2>
+          <p>Semantic Search</p>
         </div>
 
-      </div>
+        <div className="stat-card">
+          <h2>Gemini</h2>
+          <p>AI Powered</p>
+        </div>
 
-    </div>
+        <div className="stat-card">
+          <h2>RAG</h2>
+          <p>Knowledge Retrieval</p>
+        </div>
+
+      </section>
+
+      {/* Tech Stack */}
+
+      <section className="tech-stack">
+
+        <h2>Built With Modern Technologies</h2>
+
+        <div className="tech-grid">
+
+          <div className="tech-item">⚛ React</div>
+
+          <div className="tech-item">🐍 Flask</div>
+
+          <div className="tech-item">🧠 Gemini AI</div>
+
+          <div className="tech-item">🗄 ChromaDB</div>
+
+          <div className="tech-item">🔍 Semantic Search</div>
+
+          <div className="tech-item">🔐 Google OAuth</div>
+
+        </div>
+
+      </section>
+
+      <Footer />
+
+    </>
   );
 }
 
