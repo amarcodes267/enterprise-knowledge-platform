@@ -36,43 +36,51 @@ function Search() {
   };
 
   return (
-    <div style={{ padding: 16 }}>
-      <h1>Search Documents</h1>
+    <div className="page">
+      <div className="container">
+        <header className="page-header">
+          <h1>Search Documents</h1>
+          <p>Find relevant answers and sources across your uploaded enterprise documents.</p>
+        </header>
 
-      <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-        <input
-          type="text"
-          value={query}
-          placeholder="Enter query..."
-          onChange={(e) => setQuery(e.target.value)}
-          style={{ flex: 1 }}
-        />
-        <button onClick={handleSearch} disabled={loading}>
-          {loading ? "Searching..." : "Search"}
-        </button>
-      </div>
+        <div className="glass">
+          <div className="search-row">
+            <input
+              className="input"
+              type="text"
+              value={query}
+              placeholder="Enter query..."
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <button className="btn btn-primary" onClick={handleSearch} disabled={loading}>
+              {loading ? "Searching..." : "Search"}
+            </button>
+          </div>
 
-      {error ? <div style={{ color: "#b00020" }}>{error}</div> : null}
+          {error ? <div className="alert alert-danger">{error}</div> : null}
 
-      {!loading && results.length === 0 && query.trim() ? (
-        <div style={{ color: "#666", marginTop: 12 }}>No results found.</div>
-      ) : null}
+          {!loading && results.length === 0 && query.trim() ? (
+            <div className="empty">No results found.</div>
+          ) : null}
 
-      {results.length > 0 ? (
-        <div style={{ marginTop: 16 }}>
-          <h2>Results</h2>
-          <ul>
-            {results.map((src, idx) => (
-              <li key={idx} style={{ marginBottom: 10 }}>
-                <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>{src}</pre>
-              </li>
-            ))}
-          </ul>
+          {results.length > 0 ? (
+            <div className="results">
+              <h2>Results</h2>
+              <div className="result-list">
+                {results.map((src, idx) => (
+                  <div className="result-item" key={idx}>
+                    <pre>{src}</pre>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
-      ) : null}
+      </div>
     </div>
   );
 }
 
 export default Search;
+
 

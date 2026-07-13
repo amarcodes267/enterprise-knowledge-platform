@@ -2,10 +2,15 @@ import ChatBox from "../components/ChatBox";
 
 function Chat() {
   return (
-    <div>
-      <h1>Chat with Your Documents</h1>
+    <div className="page">
+      <div className="container">
+        <header className="page-header">
+          <h1>Chat with Your Documents</h1>
+          <p>Ask questions over your enterprise knowledge base with instant responses.</p>
+        </header>
 
-      <ChatBox />
+        <ChatBox />
+      </div>
     </div>
   );
 }

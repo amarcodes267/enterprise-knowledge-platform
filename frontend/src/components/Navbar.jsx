@@ -1,37 +1,52 @@
-import { Link } from "react-router-dom";
-import "../styles/Navbar.css";import "../styles/Navbar.css";
+import { Link, NavLink } from "react-router-dom";
+import "../styles/Navbar.css";
 
-export default function Navbar() {
+export default function Navbar({ user }) {
   return (
     <nav className="navbar">
-      <div className="navbar-container">
+      <div className="navbar-container container">
+        <div className="nav-left">
+          <Link to="/" className="logo" aria-label="Enterprise Knowledge Platform">
+            <span className="logo-mark" aria-hidden="true" />
+            <span className="logo-text">Enterprise Knowledge Platform</span>
+          </Link>
+        </div>
 
-        <Link to="/" className="logo">
-          🧠 Enterprise Knowledge Platform
-        </Link>
-
-        <ul className="nav-links">
+        <ul className="nav-links" aria-label="Primary navigation">
           <li>
-            <Link to="/">Home</Link>
+            <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : undefined)}>
+              Home
+            </NavLink>
           </li>
-
           <li>
-            <Link to="/upload">Upload</Link>
+            <NavLink to="/upload" className={({ isActive }) => (isActive ? "active" : undefined)}>
+              Upload
+            </NavLink>
           </li>
-
           <li>
-            <Link to="/search">Search</Link>
+            <NavLink to="/search" className={({ isActive }) => (isActive ? "active" : undefined)}>
+              Search
+            </NavLink>
           </li>
-
           <li>
-            <Link to="/chat">Chat</Link>
+            <NavLink to="/chat" className={({ isActive }) => (isActive ? "active" : undefined)}>
+              Chat
+            </NavLink>
           </li>
         </ul>
 
-        <Link to="/login" className="login-btn">
-          Login
-        </Link>
-
+        <div className="nav-right">
+          {user ? (
+            <Link to="/" className="login-btn profile-btn" aria-label="Profile">
+              <span className="profile-dot" aria-hidden="true" />
+              {user?.name ? user.name : "Account"}
+            </Link>
+          ) : (
+            <Link to="/login" className="login-btn" aria-label="Login">
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

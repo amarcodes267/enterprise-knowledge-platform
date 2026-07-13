@@ -1,11 +1,12 @@
 .footer{
 
-    background:#0f172a;
+    background:linear-gradient(135deg,#0b1220,#0f172a 40%,#0b1220);
 
     color:white;
 
     padding:70px 8% 30px;
 }
+
 
 .footer-container{
 
@@ -56,8 +57,9 @@
 
 .footer a:hover{
 
-    color:#60a5fa;
+    color:#93c5fd;
 }
+
 
 .footer-tech span{
 
@@ -69,7 +71,10 @@ hr{
     margin:50px 0 25px;
 
     border:.5px solid rgba(255,255,255,.15);
+
+    opacity:.9;
 }
+
 
 .copyright{
 

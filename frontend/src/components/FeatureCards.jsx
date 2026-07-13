@@ -31,30 +31,35 @@ const features = [
 export default function FeatureCards() {
   return (
     <section className="features">
+      <div className="container">
+        <div className="section-title">
+          <h2>Platform Features</h2>
+          <p>
+            Everything you need to build an intelligent enterprise knowledge
+            platform.
+          </p>
+        </div>
 
-      <div className="section-title">
-        <h2>Platform Features</h2>
-        <p>
-          Everything you need to build an intelligent enterprise
-          knowledge platform.
-        </p>
-      </div>
-
-      <div className="feature-grid">
-        {features.map((feature, index) => (
-          <div className="feature-card" key={index}>
-            <div className="feature-icon">{feature.icon}</div>
-
-            <h3>{feature.title}</h3>
-
-            <p>{feature.description}</p>
-
-            <Link to={feature.link} className="feature-btn">
-              {feature.button} →
-            </Link>
-          </div>
-        ))}
+        <div className="feature-grid">
+          {features.map((feature, index) => (
+            <div className="feature-card" key={index}>
+              <div className="feature-card-inner">
+                <div className="feature-icon" aria-hidden="true">
+                  {feature.icon}
+                </div>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
+                <Link to={feature.link} className="feature-btn btn btn-secondary">
+                  {feature.button} →
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
+
+

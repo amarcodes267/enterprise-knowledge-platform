@@ -1,40 +1,69 @@
 .hero{
+    position:relative;
     min-height:90vh;
+    display:flex;
+    align-items:center;
+    padding:90px 0;
+    overflow:hidden;
+}
 
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:-20% -20% auto -20%;
+    height: 520px;
+    background: radial-gradient(circle at 20% 20%, rgba(37,99,235,.18), transparent 55%),
+                radial-gradient(circle at 80% 10%, rgba(139,92,246,.18), transparent 50%),
+                radial-gradient(circle at 50% 70%, rgba(29,78,216,.14), transparent 55%);
+    pointer-events:none;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    right:-120px;
+    top:120px;
+    width: 320px;
+    height: 320px;
+    background: linear-gradient(135deg, rgba(37,99,235,.20), rgba(79,70,229,.06));
+    border-radius: 90px;
+    filter: blur(0px);
+    transform: rotate(18deg);
+    pointer-events:none;
+}
+
+.hero-inner{
+    position:relative;
+    z-index: 1;
     display:flex;
     justify-content:space-between;
     align-items:center;
-
-    padding:80px 8%;
-
-    background:linear-gradient(
-        135deg,
-        #eff6ff,
-        #ffffff,
-        #dbeafe
-    );
+    gap: 50px;
 }
 
 .hero-content{
-    width:55%;
+    flex: 1;
+    min-width: 340px;
 }
+
 
 .badge{
 
     display:inline-block;
 
-    background:#dbeafe;
+    background:linear-gradient(135deg,#dbeafe,#eff6ff);
 
-    color:#2563eb;
+    color:#1d4ed8;
 
     padding:10px 18px;
 
-    border-radius:30px;
+    border-radius:999px;
 
-    font-weight:600;
+    font-weight:700;
 
     margin-bottom:25px;
 }
+
 
 .hero h1{
 
@@ -59,74 +88,42 @@
 }
 
 .hero-buttons{
-
     display:flex;
-
-    gap:20px;
+    gap: 14px;
+    margin-top: 22px;
+    flex-wrap: wrap;
 }
 
-.primary-btn{
-
-    background:#2563eb;
-
-    color:white;
-
-    padding:15px 30px;
-
-    text-decoration:none;
-
-    border-radius:12px;
-
-    font-weight:600;
-
-    transition:.3s;
+.hero-meta{
+    display:flex;
+    gap: 10px;
+    margin-top: 22px;
+    flex-wrap: wrap;
 }
 
-.primary-btn:hover{
-
-    background:#1d4ed8;
-
-    transform:translateY(-4px);
-}
-
-.secondary-btn{
-
-    border:2px solid #2563eb;
-
-    color:#2563eb;
-
-    padding:15px 30px;
-
-    border-radius:12px;
-
-    text-decoration:none;
-
-    font-weight:600;
-
-    transition:.3s;
-}
-
-.secondary-btn:hover{
-
-    background:#2563eb;
-
-    color:white;
+.meta-pill{
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.62);
+    border: 1px solid rgba(37,99,235,.14);
+    color: var(--muted);
+    font-weight: 800;
+    font-size: 13px;
+    box-shadow: 0 12px 40px rgba(2,6,23,.05);
 }
 
 .hero-image{
-
-    width:40%;
-
+    flex: 0 0 420px;
     display:flex;
-
     justify-content:center;
 }
+
 
 .glass-card{
 
     width:380px;
 
-    background:rgba(255,255,255,.8);
+    background:rgba(255,255,255,.84);
 
     backdrop-filter:blur(15px);
 
@@ -134,8 +131,11 @@
 
     padding:35px;
 
-    box-shadow:0 20px 60px rgba(0,0,0,.08);
+    box-shadow:0 20px 60px rgba(2,6,23,.08);
+
+    border:1px solid rgba(37,99,235,.10);
 }
+
 
 .glass-card h3{
 
@@ -163,8 +163,9 @@
 
     color:#16a34a;
 
-    font-weight:600;
+    font-weight:700;
 }
+
 
 .dot{
 

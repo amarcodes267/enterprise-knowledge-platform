@@ -48,15 +48,20 @@ function UploadBox() {
   };
 
   return (
-    <div>
-      <input type="file" accept=".pdf" onChange={handleFileChange} />
+    <div className="glass upload-card">
+      <div className="upload-header">
+        <div className="upload-title">Upload your PDF</div>
+        <div className="upload-subtitle">Only .pdf files are supported.</div>
+      </div>
 
-      <button onClick={handleUpload} disabled={loading}>
+      <input className="file" type="file" accept=".pdf" onChange={handleFileChange} disabled={loading} />
+
+      <button className="btn btn-primary" onClick={handleUpload} disabled={loading}>
         {loading ? "Uploading..." : "Upload PDF"}
       </button>
 
-      {success ? <div style={{ color: "#0a7a0a", marginTop: 10 }}>{success}</div> : null}
-      {error ? <div style={{ color: "#b00020", marginTop: 10 }}>{error}</div> : null}
+      {success ? <div className="alert alert-success">{success}</div> : null}
+      {error ? <div className="alert alert-danger">{error}</div> : null}
     </div>
   );
 }
