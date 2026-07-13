@@ -20,9 +20,9 @@ from backend.routes.auth import auth_bp
 app = Flask(
     __name__,
     static_folder="static",
+    static_url_path="",
     template_folder="templates",
 )
-
 
 CORS(app)
 
