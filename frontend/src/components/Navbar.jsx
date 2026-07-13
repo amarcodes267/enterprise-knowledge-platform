@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 
-export default function Navbar({ user }) {
+export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container container">
@@ -36,18 +36,13 @@ export default function Navbar({ user }) {
         </ul>
 
         <div className="nav-right">
-          {user ? (
-            <Link to="/" className="login-btn profile-btn" aria-label="Profile">
-              <span className="profile-dot" aria-hidden="true" />
-              {user?.name ? user.name : "Account"}
-            </Link>
-          ) : (
-            <Link to="/login" className="login-btn" aria-label="Login">
-              Login
-            </Link>
-          )}
+          {/* Auth removed: keep UI simple */}
+          <Link to="/" className="login-btn" aria-label="Home">
+            Home
+          </Link>
         </div>
       </div>
     </nav>
   );
 }
+

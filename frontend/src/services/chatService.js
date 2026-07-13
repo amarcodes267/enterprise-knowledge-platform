@@ -1,14 +1,11 @@
 import BASE_URL from "./api";
-import { getAccessToken } from "../utils/auth";
 
 async function sendMessage(message) {
-  const token = getAccessToken();
-
   const response = await fetch(`${BASE_URL}/chat`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      Accept: "application/json",
     },
     body: JSON.stringify({
       message: message,
@@ -20,5 +17,8 @@ async function sendMessage(message) {
 }
 
 export default sendMessage;
+
+
+
 
 
