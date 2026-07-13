@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Allow running app.py both as `python app.py` and as a module.
-# When running as `python app.py` the package name `backend` isn't importable.
 import os
 import sys
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
@@ -36,3 +34,4 @@ def home():
 
 if __name__ == "__main__":
     app.run(debug=False)
+

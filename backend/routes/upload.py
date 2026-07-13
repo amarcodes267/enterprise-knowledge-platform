@@ -43,7 +43,6 @@ def upload_file(auth_claims):
             "message": "Only PDF files are accepted",
         }), 400
 
-    # Best-effort MIME check (not fully reliable across browsers)
     content_type = (file.mimetype or "").lower()
     if content_type and content_type not in ["application/pdf"]:
         return jsonify({

@@ -24,15 +24,15 @@ def verify_google_token(token: str) -> dict:
                 "message": "GOOGLE_CLIENT_ID is not configured",
             }
 
-        # Official verification. Raises on invalid/expired tokens.
+
         user_info = id_token.verify_oauth2_token(token, requests.Request(), client_id)
 
-        # Prefer claims that are commonly present; fall back gracefully.
+
         name = user_info.get("name")
         email = user_info.get("email")
         google_id = user_info.get("sub")
 
-        # Picture claim can appear as picture or picture_url depending on the flow.
+
         picture = user_info.get("picture") or user_info.get("picture_url")
 
         if not email or not google_id:
@@ -51,7 +51,7 @@ def verify_google_token(token: str) -> dict:
         }
 
     except ValueError as e:
-        # Includes invalid signature/audience/expired etc.
+
         return {
             "status": "error",
             "code": "invalid_google_token",

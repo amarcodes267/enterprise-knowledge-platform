@@ -22,7 +22,6 @@ def google_auth():
 
     verification = verify_google_token(token)
     if verification.get("status") != "success":
-        # verification may contain safe fields: code/message
         return (
             jsonify({"success": False, "message": verification.get("message", "Google authentication failed"), "code": verification.get("code")}),
             401,
@@ -32,7 +31,7 @@ def google_auth():
     if tokens.get("status") == "error":
         return jsonify({"success": False, "message": "Failed to create JWT tokens"}), 500
 
-    # Expected response shape for frontend
+
     return (
         jsonify(
             {
@@ -54,8 +53,7 @@ def google_auth():
 @auth_bp.route("/auth/logout", methods=["POST"])
 @require_bearer_token
 def logout():
-    # Best-effort placeholder: existing app does not implement token blacklisting.
-    # We still return success to keep client flows consistent.
+
     auth_header = request.headers.get("Authorization", "")
     access_token = auth_header.split(" ", 1)[1] if " " in auth_header else None
     if access_token:

@@ -25,13 +25,14 @@ def _get_model():
         return _model
 
     try:
-        import google.generativeai as genai  # type: ignore
+        import google.generativeai as genai  
+
 
         api_key = os.getenv("GEMINI_API_KEY", "YOUR_GEMINI_API_KEY")
         genai.configure(api_key=api_key)
         _model = genai.GenerativeModel("gemini-2.5-flash")
         return _model
-    except Exception as e:  # pragma: no cover
+    except Exception as e:
         _model_error = str(e)
         _model = None
         return None
