@@ -20,11 +20,10 @@ const handleSuccess = async (credentialResponse) => {
     });
 
     const data = await res.json().catch(() => ({}));
-
-    if (!res.ok || !data?.success) {
-      setError(data?.message || "Google login failed.");
-      return;
-    }
+if (!res.ok || !data?.success) {
+  setError(data?.message || "Google login failed.");
+  return;
+}
 
     setTokens({
       access_token: data.token,
