@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
 from dotenv import load_dotenv
 
@@ -17,10 +17,15 @@ from backend.routes.chat import chat_bp
 from backend.routes.auth import auth_bp
 
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder="static",
+    template_folder="templates",
+)
 
 
 CORS(app)
+
 
 app.register_blueprint(health_bp)
 app.register_blueprint(upload_bp)
@@ -30,8 +35,23 @@ app.register_blueprint(auth_bp)
 
 @app.route("/")
 def home():
-    return "Enterprise Knowledge Intelligence Platform Running"
+    return render_template("index.html")
+
+
+# React SPA: serve index.html for any non-API path so refresh works.
+@app.route("/<path:path>")
+def catch_all(path):
+    # Let API/asset requests pass through.
+    api_prefixes = ("/health", "/upload", "/search", "/chat", "/auth")
+    candidate = f"/{path}"
+    if candidate.startswith(api_prefixes):
+        return {"error": "Not Found"}, 404
+
+    # Serve React app for everything else (client-side routing)
+    return render_template("index.html")
+
 
 if __name__ == "__main__":
     app.run(debug=False)
+
 
