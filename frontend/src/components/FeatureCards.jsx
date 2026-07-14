@@ -4,62 +4,82 @@ import "../styles/FeatureCards.css";
 const features = [
   {
     icon: "📄",
-    title: "Upload Documents",
+    title: "Smart Document Upload",
     description:
-      "Upload PDFs securely and create your AI-powered enterprise knowledge base.",
+      "Securely upload PDFs and automatically transform enterprise documents into an AI-ready knowledge base.",
     link: "/upload",
-    button: "Upload Now",
+    button: "Upload Documents",
   },
   {
     icon: "🔍",
     title: "Semantic Search",
     description:
-      "Find relevant information instantly using AI-powered semantic search.",
+      "Retrieve the most relevant information instantly using vector embeddings and semantic understanding.",
     link: "/search",
-    button: "Search",
+    button: "Explore Search",
   },
   {
-    icon: "💬",
-    title: "AI Chat",
+    icon: "🤖",
+    title: "AI Knowledge Chat",
     description:
-      "Ask questions about your uploaded documents using Gemini AI and RAG.",
+      "Interact naturally with your enterprise documents using Retrieval-Augmented Generation powered by Gemini AI.",
     link: "/chat",
-    button: "Start Chat",
+    button: "Start Conversation",
   },
 ];
 
 export default function FeatureCards() {
   return (
     <section className="features">
+
       <div className="container">
+
         <div className="section-title">
-          <h2>Platform Features</h2>
+
+          <span className="section-badge">
+            Enterprise Features
+          </span>
+
+          <h2>
+            Everything You Need for
+            <span> Enterprise AI</span>
+          </h2>
+
           <p>
-            Everything you need to build an intelligent enterprise knowledge
-            platform.
+            Build an intelligent knowledge platform with document processing,
+            semantic search, and conversational AI in one unified experience.
           </p>
+
         </div>
 
         <div className="feature-grid">
+
           {features.map((feature, index) => (
             <div className="feature-card" key={index}>
-              <div className="feature-card-inner">
-                <div className="feature-icon" aria-hidden="true">
-                  {feature.icon}
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-                <Link to={feature.link} className="feature-btn btn btn-secondary">
-                  {feature.button} →
-                </Link>
+
+              <div className="feature-icon">
+                {feature.icon}
               </div>
+
+              <h3>{feature.title}</h3>
+
+              <p>{feature.description}</p>
+
+              <Link
+                to={feature.link}
+                className="feature-btn"
+              >
+                {feature.button}
+                <span>→</span>
+              </Link>
+
             </div>
           ))}
+
         </div>
+
       </div>
+
     </section>
   );
 }
-
-
-

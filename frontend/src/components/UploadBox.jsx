@@ -1,5 +1,6 @@
 import { useState } from "react";
 import uploadPDF from "../services/uploadService";
+import "../styles/UploadBox.css";
 
 function UploadBox() {
   const [file, setFile] = useState(null);
@@ -23,6 +24,7 @@ function UploadBox() {
     }
 
     const lower = (file.name || "").toLowerCase();
+
     if (!lower.endsWith(".pdf")) {
       setError("Only PDF files are accepted.");
       return;
@@ -30,41 +32,114 @@ function UploadBox() {
 
     try {
       setLoading(true);
+
       const result = await uploadPDF(file);
 
       if (result?.status === "success") {
         setSuccess(
-          `PDF uploaded successfully: ${result.filename} | Chunks: ${result.total_chunks}, Embeddings: ${result.embedding_count}`
+          `Document processed successfully.
+Filename: ${result.filename}
+Chunks: ${result.total_chunks}
+Embeddings: ${result.embedding_count}`
         );
       } else {
         setError(result?.message || "Upload failed.");
       }
     } catch (e) {
       console.error(e);
-      setError("Upload failed. Check console for details.");
+      setError("Upload failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="glass upload-card">
-      <div className="upload-header">
-        <div className="upload-title">Upload your PDF</div>
-        <div className="upload-subtitle">Only .pdf files are supported.</div>
+    <div className="upload-box">
+
+      <div className="upload-top">
+
+        <div className="upload-icon">
+          📄
+        </div>
+
+        <h2>Upload PDF Document</h2>
+
+        <p>
+          Upload enterprise PDF documents to create your AI-powered
+          knowledge base.
+        </p>
+
       </div>
 
-      <input className="file" type="file" accept=".pdf" onChange={handleFileChange} disabled={loading} />
+      <label className="upload-dropzone">
 
-      <button className="btn btn-primary" onClick={handleUpload} disabled={loading}>
-        {loading ? "Uploading..." : "Upload PDF"}
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleFileChange}
+          disabled={loading}
+        />
+
+        <div className="dropzone-content">
+
+          <div className="drop-icon">
+            ☁️
+          </div>
+
+          <h3>
+            Drag & Drop your PDF
+          </h3>
+
+          <p>
+            or click to browse files
+          </p>
+
+        </div>
+
+      </label>
+
+      {file && (
+
+        <div className="selected-file">
+
+          <span>📑</span>
+
+          <div>
+
+            <strong>{file.name}</strong>
+
+            <small>
+              {(file.size / 1024 / 1024).toFixed(2)} MB
+            </small>
+
+          </div>
+
+        </div>
+
+      )}
+
+      <button
+        className="upload-btn"
+        onClick={handleUpload}
+        disabled={loading}
+      >
+        {loading ? "Processing Document..." : "Upload & Process"}
       </button>
 
-      {success ? <div className="alert alert-success">{success}</div> : null}
-      {error ? <div className="alert alert-danger">{error}</div> : null}
+      {success && (
+        <div className="upload-success">
+          {success}
+        </div>
+      )}
+
+      {error && (
+        <div className="upload-error">
+          {error}
+        </div>
+      )}
+
     </div>
   );
 }
 
 export default UploadBox;
-

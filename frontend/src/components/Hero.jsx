@@ -3,56 +3,103 @@ import "../styles/Hero.css";
 
 export default function Hero() {
   return (
-<section className="hero">
-      <div className="container hero-inner">
-        <div className="hero-content">
-          <span className="badge">🚀 AI Powered Enterprise Search</span>
+    <section className="hero">
+      <div className="hero-background"></div>
 
-          <h1>
-            Transform Your Documents
-            <br />
-            Into AI Knowledge
+      <div className="container hero-inner">
+        {/* LEFT SIDE */}
+        <div className="hero-content">
+          <span className="hero-badge">
+            ✨ Enterprise AI • RAG • Semantic Search
+          </span>
+
+          <h1 className="hero-title">
+            Enterprise Knowledge
+            <span> Intelligence Platform</span>
           </h1>
 
-          <p>
-            Upload PDFs, perform semantic search, and chat with your enterprise
-            documents using <strong>RAG, ChromaDB, and Gemini AI</strong>.
+          <p className="hero-description">
+            Unlock the power of your enterprise knowledge with an AI-powered
+            platform that enables intelligent document search, semantic
+            retrieval, and contextual conversations using{" "}
+            <strong>RAG, ChromaDB, and Gemini AI.</strong>
           </p>
 
           <div className="hero-buttons">
-            <Link to="/upload" className="btn btn-primary">
-              📄 Upload Documents
+            <Link to="/upload" className="btn-primary">
+              Upload Documents
             </Link>
 
-            <Link to="/chat" className="btn btn-secondary">
-              💬 Start Chat
+            <Link to="/chat" className="btn-secondary">
+              Try AI Chat
             </Link>
           </div>
 
-          <div className="hero-meta">
-            <div className="meta-pill">⚡ Fast semantic retrieval</div>
-            <div className="meta-pill">🔒 Secure enterprise access</div>
+          <div className="hero-stats">
+            <div className="stat-card">
+              <h3>10K+</h3>
+              <p>Documents Indexed</p>
+            </div>
+
+            <div className="stat-card">
+              <h3>98%</h3>
+              <p>Search Accuracy</p>
+            </div>
+
+            <div className="stat-card">
+              <h3>300ms</h3>
+              <p>Average Response</p>
+            </div>
           </div>
         </div>
 
+        {/* RIGHT SIDE */}
         <div className="hero-image">
-          <div className="glass-card card">
-            <h3>🧠 AI Assistant</h3>
-            <p>
-              Ask questions from thousands of documents instantly using Retrieval-Augmented
-              Generation.
-            </p>
-            <div className="status">
-              <span className="dot" />
-              Connected to Gemini AI
+
+          <div className="dashboard-card">
+
+            <div className="dashboard-header">
+              <div className="green-dot"></div>
+              AI Knowledge Engine
             </div>
+
+            <div className="dashboard-body">
+
+              <div className="dashboard-item">
+                📄 Document Uploaded
+              </div>
+
+              <div className="dashboard-item">
+                🧠 Embeddings Generated
+              </div>
+
+              <div className="dashboard-item">
+                🔍 Semantic Search Ready
+              </div>
+
+              <div className="dashboard-item">
+                🤖 Gemini AI Connected
+              </div>
+
+            </div>
+
+            <div className="dashboard-footer">
+
+              <div className="progress-bar">
+                <div className="progress-fill"></div>
+              </div>
+
+              <p>Knowledge Base Ready</p>
+
+            </div>
+
           </div>
+
         </div>
       </div>
     </section>
   );
 }
-
 
 
 

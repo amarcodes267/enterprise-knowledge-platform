@@ -1,6 +1,6 @@
 import { useState } from "react";
-
 import { searchDocuments } from "../services/searchService";
+import "../styles/Search.css";
 
 function Search() {
   const [query, setQuery] = useState("");
@@ -13,6 +13,7 @@ function Search() {
     setResults([]);
 
     const q = query.trim();
+
     if (!q) {
       setError("Please enter a search query.");
       return;
@@ -20,6 +21,7 @@ function Search() {
 
     try {
       setLoading(true);
+
       const res = await searchDocuments(q);
 
       if (res?.status === "success") {
@@ -29,58 +31,110 @@ function Search() {
       }
     } catch (e) {
       console.error(e);
-      setError("Unable to get search results.");
+      setError("Unable to retrieve search results.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="page">
-      <div className="container">
-        <header className="page-header">
-          <h1>Search Documents</h1>
-          <p>Find relevant answers and sources across your uploaded enterprise documents.</p>
-        </header>
+    <div className="search-page">
 
-        <div className="glass">
-          <div className="search-row">
+      <div className="container">
+
+        <div className="search-header">
+
+          <span className="page-badge">
+            Enterprise Semantic Search
+          </span>
+
+          <h1>
+            AI Powered
+            <span> Document Search</span>
+          </h1>
+
+          <p>
+            Search across your enterprise knowledge base using semantic
+            retrieval powered by vector embeddings and Retrieval-Augmented
+            Generation.
+          </p>
+
+        </div>
+
+        <div className="search-card">
+
+          <div className="search-box">
+
             <input
-              className="input"
               type="text"
               value={query}
-              placeholder="Enter query..."
+              placeholder="Search your enterprise knowledge..."
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button className="btn btn-primary" onClick={handleSearch} disabled={loading}>
+
+            <button
+              onClick={handleSearch}
+              disabled={loading}
+            >
               {loading ? "Searching..." : "Search"}
             </button>
+
           </div>
 
-          {error ? <div className="alert alert-danger">{error}</div> : null}
-
-          {!loading && results.length === 0 && query.trim() ? (
-            <div className="empty">No results found.</div>
-          ) : null}
-
-          {results.length > 0 ? (
-            <div className="results">
-              <h2>Results</h2>
-              <div className="result-list">
-                {results.map((src, idx) => (
-                  <div className="result-item" key={idx}>
-                    <pre>{src}</pre>
-                  </div>
-                ))}
-              </div>
+          {error && (
+            <div className="search-error">
+              {error}
             </div>
-          ) : null}
+          )}
+
+          {!loading && results.length === 0 && query.trim() && (
+            <div className="search-empty">
+              No matching documents found.
+            </div>
+          )}
+
+          {results.length > 0 && (
+
+            <div className="results-section">
+
+              <h2>Search Results</h2>
+
+              <div className="results-grid">
+
+                {results.map((item, index) => (
+
+                  <div className="result-card" key={index}>
+
+                    <div className="result-top">
+
+                      <span className="result-number">
+                        #{index + 1}
+                      </span>
+
+                      <span className="confidence">
+                        Semantic Match
+                      </span>
+
+                    </div>
+
+                    <pre>{item}</pre>
+
+                  </div>
+
+                ))}
+
+              </div>
+
+            </div>
+
+          )}
+
         </div>
+
       </div>
+
     </div>
   );
 }
 
 export default Search;
-
-

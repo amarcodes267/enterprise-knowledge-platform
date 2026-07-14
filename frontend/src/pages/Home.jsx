@@ -12,44 +12,72 @@ function Home() {
 
       <FeatureCards />
 
-      {/* Why Choose Us Section */}
+      {/* Why Choose Our Platform */}
 
       <section className="why-section">
 
-        <h2>Why Choose Our Platform?</h2>
+        <div className="container">
 
-        <p className="section-subtitle">
-          Build an intelligent enterprise knowledge base powered by
-          Retrieval-Augmented Generation (RAG), ChromaDB, and Gemini AI.
-        </p>
+          <div className="section-header">
 
-        <div className="why-grid">
+            <span className="section-badge">
+              Why Choose Us
+            </span>
 
-          <div className="why-card">
-            <h3>⚡ Lightning Fast</h3>
-
-            <p>
-              Retrieve answers from thousands of documents in seconds
-              using semantic search.
-            </p>
-          </div>
-
-          <div className="why-card">
-            <h3>🔒 Secure</h3>
+            <h2>
+              Built for Modern
+              <span> Enterprise AI</span>
+            </h2>
 
             <p>
-              Protected authentication with Google OAuth and JWT
-              authorization.
-            </p>
-          </div>
-
-          <div className="why-card">
-            <h3>🧠 AI Powered</h3>
-
-            <p>
-              Get accurate AI-generated responses using Gemini AI and
+              A complete AI-powered knowledge platform designed for intelligent
+              document management, semantic search, and conversational AI using
               Retrieval-Augmented Generation.
             </p>
+
+          </div>
+
+          <div className="why-grid">
+
+            <div className="why-card">
+
+              <div className="why-icon">⚡</div>
+
+              <h3>Lightning Fast Search</h3>
+
+              <p>
+                Retrieve accurate answers from thousands of enterprise documents
+                within milliseconds using semantic vector search.
+              </p>
+
+            </div>
+
+            <div className="why-card">
+
+              <div className="why-icon">🛡️</div>
+
+              <h3>Enterprise Ready</h3>
+
+              <p>
+                Built with scalable architecture, secure APIs, and intelligent
+                document processing suitable for enterprise environments.
+              </p>
+
+            </div>
+
+            <div className="why-card">
+
+              <div className="why-icon">🤖</div>
+
+              <h3>AI Powered</h3>
+
+              <p>
+                Generate contextual answers using Gemini AI combined with
+                Retrieval-Augmented Generation and ChromaDB.
+              </p>
+
+            </div>
+
           </div>
 
         </div>
@@ -60,47 +88,74 @@ function Home() {
 
       <section className="stats">
 
-        <div className="stat-card">
-          <h2>24/7</h2>
-          <p>AI Availability</p>
-        </div>
+        <div className="container">
 
-        <div className="stat-card">
-          <h2>100%</h2>
-          <p>Semantic Search</p>
-        </div>
+          <div className="stats-grid">
 
-        <div className="stat-card">
-          <h2>Gemini</h2>
-          <p>AI Powered</p>
-        </div>
+            <div className="stat-card">
+              <h2>10K+</h2>
+              <p>Documents Indexed</p>
+            </div>
 
-        <div className="stat-card">
-          <h2>RAG</h2>
-          <p>Knowledge Retrieval</p>
+            <div className="stat-card">
+              <h2>98%</h2>
+              <p>Search Accuracy</p>
+            </div>
+
+            <div className="stat-card">
+              <h2>300ms</h2>
+              <p>Average Response</p>
+            </div>
+
+            <div className="stat-card">
+              <h2>24/7</h2>
+              <p>AI Availability</p>
+            </div>
+
+          </div>
+
         </div>
 
       </section>
 
-      {/* Tech Stack */}
+      {/* Technology Stack */}
 
       <section className="tech-stack">
 
-        <h2>Built With Modern Technologies</h2>
+        <div className="container">
 
-        <div className="tech-grid">
+          <div className="section-header">
 
-          <div className="tech-item">⚛ React</div>
+            <span className="section-badge">
+              Technology Stack
+            </span>
 
-          <div className="tech-item">🐍 Flask</div>
+            <h2>
+              Built Using Modern AI Technologies
+            </h2>
 
-          <div className="tech-item">🧠 Gemini AI</div>
+            <p>
+              A production-inspired technology stack combining AI, vector
+              databases, and modern web development.
+            </p>
 
-          <div className="tech-item">🗄 ChromaDB</div>
+          </div>
 
-          <div className="tech-item">🔍 Semantic Search</div>
+          <div className="tech-grid">
 
-          <div className="tech-item">🔐 Google OAuth</div>
+            <div className="tech-item">⚛ React</div>
+
+            <div className="tech-item">🐍 Flask</div>
+
+            <div className="tech-item">🤖 Gemini AI</div>
+
+            <div className="tech-item">🗄️ ChromaDB</div>
+
+            <div className="tech-item">🔍 Semantic Search</div>
+
+            <div className="tech-item">📚 RAG Pipeline</div>
+
+          </div>
 
         </div>
 

@@ -3,46 +3,96 @@ import "../styles/Navbar.css";
 
 export default function Navbar() {
   return (
-    <nav className="navbar">
-      <div className="navbar-container container">
+    <header className="navbar">
+
+      <div className="navbar-container">
+
+        {/* Logo */}
+
         <div className="nav-left">
-          <Link to="/" className="logo" aria-label="Enterprise Knowledge Platform">
-            <span className="logo-mark" aria-hidden="true" />
-            <span className="logo-text">Enterprise Knowledge Platform</span>
+
+          <Link
+            to="/"
+            className="logo"
+            aria-label="Enterprise Knowledge Platform"
+          >
+            <span className="logo-mark"></span>
+
+            <div className="logo-text">
+              Enterprise Knowledge
+              <small>Intelligence Platform</small>
+            </div>
+
           </Link>
+
         </div>
 
-        <ul className="nav-links" aria-label="Primary navigation">
+        {/* Navigation */}
+
+        <ul className="nav-links">
+
           <li>
-            <NavLink to="/" end className={({ isActive }) => (isActive ? "active" : undefined)}>
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                isActive ? "active" : ""
+              }
+            >
               Home
             </NavLink>
           </li>
+
           <li>
-            <NavLink to="/upload" className={({ isActive }) => (isActive ? "active" : undefined)}>
+            <NavLink
+              to="/upload"
+              className={({ isActive }) =>
+                isActive ? "active" : ""
+              }
+            >
               Upload
             </NavLink>
           </li>
+
           <li>
-            <NavLink to="/search" className={({ isActive }) => (isActive ? "active" : undefined)}>
+            <NavLink
+              to="/search"
+              className={({ isActive }) =>
+                isActive ? "active" : ""
+              }
+            >
               Search
             </NavLink>
           </li>
+
           <li>
-            <NavLink to="/chat" className={({ isActive }) => (isActive ? "active" : undefined)}>
-              Chat
+            <NavLink
+              to="/chat"
+              className={({ isActive }) =>
+                isActive ? "active" : ""
+              }
+            >
+              AI Chat
             </NavLink>
           </li>
+
         </ul>
 
+        {/* Right Button */}
+
         <div className="nav-right">
-          {/* Auth removed: keep UI simple */}
-          <Link to="/" className="login-btn" aria-label="Home">
-            Home
+
+          <Link
+            to="/upload"
+            className="login-btn"
+          >
+            Get Started
           </Link>
+
         </div>
+
       </div>
-    </nav>
+
+    </header>
   );
 }
-
