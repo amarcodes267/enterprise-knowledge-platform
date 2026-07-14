@@ -1,5 +1,5 @@
 import UploadBox from "../components/UploadBox";
-import "../styles/Upload.css";
+import "../styles/upload.css";
 
 function Upload() {
   return (
