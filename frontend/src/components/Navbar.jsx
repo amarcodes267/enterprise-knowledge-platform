@@ -4,95 +4,84 @@ import "../styles/Navbar.css";
 export default function Navbar() {
   return (
     <header className="navbar">
-
       <div className="navbar-container">
 
-        {/* Logo */}
+        {/* ================= LOGO ================= */}
 
-        <div className="nav-left">
+        <Link
+          to="/"
+          className="logo"
+          aria-label="Enterprise Knowledge Platform"
+        >
+          <div className="logo-mark">
+            <span className="logo-dot"></span>
+          </div>
 
-          <Link
+          <div className="logo-content">
+            <h2>Enterprise Knowledge Platform</h2>
+            <p>AI Powered Enterprise Search</p>
+          </div>
+        </Link>
+
+        {/* ================= NAVIGATION ================= */}
+
+        <nav className="nav-menu">
+          <NavLink
             to="/"
-            className="logo"
-            aria-label="Enterprise Knowledge Platform"
+            end
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
           >
-            <span className="logo-mark"></span>
+            Home
+          </NavLink>
 
-            <div className="logo-text">
-              Enterprise Knowledge
-              <small>Intelligence Platform</small>
-            </div>
-
-          </Link>
-
-        </div>
-
-        {/* Navigation */}
-
-        <ul className="nav-links">
-
-          <li>
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                isActive ? "active" : ""
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/upload"
-              className={({ isActive }) =>
-                isActive ? "active" : ""
-              }
-            >
-              Upload
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/search"
-              className={({ isActive }) =>
-                isActive ? "active" : ""
-              }
-            >
-              Search
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/chat"
-              className={({ isActive }) =>
-                isActive ? "active" : ""
-              }
-            >
-              AI Chat
-            </NavLink>
-          </li>
-
-        </ul>
-
-        {/* Right Button */}
-
-        <div className="nav-right">
-
-          <Link
+          <NavLink
             to="/upload"
-            className="login-btn"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
           >
+            Upload
+          </NavLink>
+
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Search
+          </NavLink>
+
+          <NavLink
+            to="/chat"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            AI Chat
+          </NavLink>
+
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            About
+          </NavLink>
+        </nav>
+
+        {/* ================= BUTTON ================= */}
+
+        <div className="nav-actions">
+          <Link to="/upload" className="primary-btn">
             Get Started
           </Link>
-
         </div>
 
       </div>
-
     </header>
   );
 }
