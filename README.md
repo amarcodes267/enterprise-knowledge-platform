@@ -208,26 +208,31 @@ VITE_API_BASE_URL=http://127.0.0.1:5000
 
 ---
 
-## Running the Project
+## Running the Project Locally
 
-### Start the Backend (Flask)
-From the repository root:
+To run the project locally, you need two separate terminal windows (one for the backend and one for the frontend).
+
+### 1. Start the Backend
+Open your first terminal and run:
 
 ```bash
-python backend/app.py
+# Make sure your virtual environment is activated!
+cd backend
+python app.py
 ```
+*(The backend will start on http://localhost:5000)*
 
-The server is configured to run with `debug=False`.
-
-### Start the Frontend (Vite dev server)
-From the repository root:
+### 2. Start the Frontend
+Open your second terminal and run:
 
 ```bash
 cd frontend
 npm run dev
 ```
+*(The frontend will start on http://localhost:5173)*
 
-Then open the URL printed by Vite.
+Now, open **`http://localhost:5173`** in your browser. 
+> **Note:** Do NOT use the deployed Firebase URL to test local changes, as browsers block requests from public websites to your local backend.
 
 ---
 
