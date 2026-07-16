@@ -22,8 +22,8 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/about" element={<About />} />
 
-        {/* Disable auth-gated login. */}
-        <Route path="/login" element={<Home />} />
+        {/* Enable auth-gated login. */}
+        <Route path="/login" element={<Login />} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

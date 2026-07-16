@@ -12,6 +12,7 @@
   "dependencies": {
     "@babel/core": "^7.29.7",
     "@react-oauth/google": "^0.13.5",
+    "firebase": "^12.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.30.4"
